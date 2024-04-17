@@ -14,8 +14,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Shop.init({
-    itemName: DataTypes.STRING,
-    price: DataTypes.INTEGER
+    itemName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Please enter item name"
+        },
+        notEmpty: {
+          msg: "Item name cannot be empty"
+        }
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isNumeric: {
+          msg: "Please enter correct price"
+        },
+        notNull: {
+          msg: "Please enter your password"
+        },
+        notEmpty: {
+          msg: "Password cannot be empty"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'Shop',

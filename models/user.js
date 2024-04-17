@@ -11,14 +11,61 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Inventory,{
+        foreignKey: {
+          name: "userID"
+        }
+      })
     }
   }
   User.init({
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    name: DataTypes.STRING,
-    digimonCount: DataTypes.INTEGER,
-    digicoin: DataTypes.INTEGER
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Please enter your email"
+        },
+        notEmpty: {
+          msg: "Email cannot be empty"
+        },
+        isEmail: {
+          msg: "Please enter your email"
+        }
+      },
+      unique: {
+        msg : "Email already registered"
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Please enter your password"
+        },
+        notEmpty: {
+          msg: "Password cannot be empty"
+        }
+      }
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Please enter your name"
+        }
+      }
+    },
+    digimonCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    digicoin: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
   }, {
     sequelize,
     modelName: 'User',
