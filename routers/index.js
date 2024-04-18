@@ -6,9 +6,11 @@ const DigimonController = require('../controllers/digimons');
 const router = express.Router();
 const app = express()
 
+router.get('/', UserController.tes)
+  
 //login-regis
-router.post('/login', UserController.login)
 router.post('/register', UserController.register)
+router.post('/login', UserController.login)
 
 //middleware
 // router.use(authentication)

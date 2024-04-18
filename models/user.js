@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notNull: {
           msg: "Please enter your email"
@@ -36,9 +37,6 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Please enter your email"
         }
       },
-      unique: {
-        msg : "Email already registered"
-      }
     },
     password: {
       type: DataTypes.STRING,
@@ -70,7 +68,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     digicoin: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 100
     },
   }, {
     hooks:{
