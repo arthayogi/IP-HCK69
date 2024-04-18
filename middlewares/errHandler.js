@@ -11,6 +11,8 @@ const errHandler = (err,req,res,next)=>{
             res.status(400).json({ message: "Password is required" })
         case "InvalidLogin":
             res.status(400).json({ message: "Email/Password incorrect"})
+        case "notFound":
+            res.status(404).json({ message: "Data not found"})
         default:
             break;
     }

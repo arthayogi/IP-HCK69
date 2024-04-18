@@ -31,38 +31,53 @@ class UserController {
 
   static async login(req, res, next) {
     try {
+      let { email, password } = req.body;
 
-        let { email, password } = req.body;
+      if (!email) throw { name: "EmailRequired" };
+      if (!password) throw { name: "PasswordRequired" };
 
-        if(!email) throw {name: "EmailRequired"}
-        if(!password) throw {name: "PasswordRequired"}
+      const findUser = await User.findOne({
+        where: {
+          email: req.body.email,
+        },
+      });
+      //check email
+      if (!findUser) throw { name: "InvalidLogin" };
 
-        const findUser = await User.findOne({
-            where: {
-                email : req.body.email
-            }
-        })
-        //check email
-        if(!findUser) throw {name: "InvalidLogin"}
+      //check password
+      const checkPassword = comparePassword(
+        req.body.password,
+        findUser.password
+      );
+      if (!checkPassword) throw { name: "InvalidLogin" };
 
-        //check password
-        const checkPassword = comparePassword(req.body.password, findUser.password)
-        if(!checkPassword) throw {name: "InvalidLogin"}
+      //check token
+      const payload = { id: findUser.id };
+      const token = signToken(payload);
 
-        //check token
-        const payload = {id: findUser.id}
-        const token = signToken(payload)
-
-        let access_token = token
-        res.status(200).json({ message : "Login success", access_token})
-
+      let access_token = token;
+      res.status(200).json({ message: "Login success", access_token });
     } catch (error) {
-        console.log(error);
-        next(error)
+      console.log(error);
+      next(error);
     }
   }
 
-  static async profileById() {}
+  static async profileById(req, res, next) {
+    try {
+      let { id } = req.params;
+
+      let findProfile = await User.findOne({
+        where: {id},
+      });
+
+      if (!findProfile) throw { name: "notFound", id };
+      res.status(200).json(findProfile);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 }
 
 module.exports = UserController;

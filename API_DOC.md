@@ -115,7 +115,7 @@ Request:
 }
 ```
 
-_Response (201 - Created)_
+_Response (200 - Success)_
 ```json
 {
     "message": "Login success",
@@ -140,6 +140,41 @@ OR
 
 ## 3. POST /profile/:id
 
+Description : Untuk mendapatkan data profile melalui params ID
 
+Request :
 
+- headers:
+```json
+{
+    "authorization": "Bearer <token>" 
+}
+```
 
+- params:
+```json
+{
+    "id": "integer"
+}
+```
+
+_Response (200 - Success)_
+```json
+{
+    "id": 1,
+    "email": "asd@asd.com",
+    "password": "$2a$10$7DV9WxzIiNNESG6x7fbuzuc5BzmPTuFYDne2JzXpXpudKw1WP/5qG",
+    "name": "New User",
+    "digimonCount": 0,
+    "digicoin": 100,
+    "createdAt": "2024-04-18T04:38:21.500Z",
+    "updatedAt": "2024-04-18T04:38:21.500Z"
+}
+```
+
+_Response (404 - Not Found)_
+```json
+{
+    "message": "Data not found"
+}
+```
