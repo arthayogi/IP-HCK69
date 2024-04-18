@@ -2,7 +2,7 @@
   "name": "ip-hck69",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,9 +20,15 @@
   "dependencies": {
     "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.4",
     "pg": "^8.11.5",
-    "sequelize": "^6.37.3"
+    "react-router-dom": "^6.22.3",
+    "sequelize": "^6.37.3",
+    "sort-by": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
